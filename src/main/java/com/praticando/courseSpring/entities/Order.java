@@ -1,6 +1,7 @@
 package com.praticando.courseSpring.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.praticando.courseSpring.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -15,6 +16,9 @@ public class Order implements java.io.Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
+
+    private Integer orderStatus;
+
     // Significa o relacionamento de um cliente com varias pedidos
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -23,13 +27,25 @@ public class Order implements java.io.Serializable {
     public Order(){
     }
 
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment,OrderStatus OrderStatus, User client) {
         this.id = id;
         this.moment = moment;
+        setOrderStatus(OrderStatus);
         this.client = client;
     }
     public Long getId() {
         return id;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
+
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.ValueOf(orderStatus);
     }
 
     public void setId(Long id) {
