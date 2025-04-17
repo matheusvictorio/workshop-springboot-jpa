@@ -3,6 +3,9 @@ package com.praticando.courseSpring.entities;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+import java.util.Set;
 
 @jakarta.persistence.Entity
 @jakarta.persistence.Table(name = "tb_categories")
@@ -11,6 +14,9 @@ public class Category  implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Transient
+    private Set<Product> products = new java.util.HashSet<>();
 
     public Category(){
 
@@ -34,6 +40,10 @@ public class Category  implements java.io.Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
