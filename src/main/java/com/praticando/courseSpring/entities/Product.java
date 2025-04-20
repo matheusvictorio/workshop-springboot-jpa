@@ -1,5 +1,8 @@
 package com.praticando.courseSpring.entities;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
 
 import java.util.Set;
@@ -15,7 +18,10 @@ public class Product implements java.io.Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new java.util.HashSet<>();
 
     public Product(){
