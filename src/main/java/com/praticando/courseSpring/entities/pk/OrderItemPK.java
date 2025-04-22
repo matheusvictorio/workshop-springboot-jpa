@@ -31,6 +31,7 @@ public class OrderItemPK implements java.io.Serializable {
         this.product = product;
     }
 
+
     @Override
     public int hashCode() {
         final int prime = 31;

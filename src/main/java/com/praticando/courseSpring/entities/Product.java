@@ -1,9 +1,7 @@
 package com.praticando.courseSpring.entities;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Transient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -23,6 +21,10 @@ public class Product implements java.io.Serializable {
     joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new java.util.HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new java.util.HashSet<>();
+
 
     public Product(){
 
@@ -70,6 +72,14 @@ public class Product implements java.io.Serializable {
         return categories;
     }
 
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new java.util.HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
