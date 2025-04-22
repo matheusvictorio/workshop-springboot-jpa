@@ -1,5 +1,6 @@
 package com.praticando.courseSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 
@@ -14,6 +15,7 @@ public class Payment implements java.io.Serializable {
     private Long id;
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Order order;

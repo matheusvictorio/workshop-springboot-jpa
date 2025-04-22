@@ -87,6 +87,14 @@ public class Order implements java.io.Serializable {
         return items;
     }
 
+    public Double getTotal() {
+        Double total = 0.0;
+        for (OrderItem item : items) {
+            total += item.getSubTotal();
+        }
+        return total;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
