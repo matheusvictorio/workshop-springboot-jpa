@@ -1,4 +1,4 @@
-package com.praticando.courseSpring.services.exception;
+package com.praticando.courseSpring.services.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(Object id) {
